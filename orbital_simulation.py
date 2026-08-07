@@ -27,11 +27,19 @@ momentum = velocity * mass_earth
 #end variable setup, begin calculations and updates
 ###############################################################################
 
-#find force on rotating object
-force_centripetal = (g * mass_earth * mass_sun)/((radius_orbit) ** 2) * #unit vector sun to earth
+while t < 36000000:
+    #find force on rotating object
+    force_centripetal = (g * mass_earth * mass_sun)/((radius_orbit) ** 2) * r_unit
 
-#update momentum
-momentum += force_centripetal * dt
+    #update momentum
+    momentum += force_centripetal * dt
 
-=
+    velocity = momentum / mass_earth
 
+    r += velocity * dt
+
+    t += dt
+
+    #save data to a list here to graph later
+
+#create graph here after loop done
