@@ -2,6 +2,7 @@
 """tangential velocity of earth = 29800 m/s"""
 
 import numpy as np
+import matplotlib.pyplot as plt
 
 #mass of earth
 mass_earth  = 6e24
@@ -31,9 +32,9 @@ t = 0
 #end variable setup, begin calculations and updates
 ###############################################################################
 
-while t < 360000:
+while t < 31536000:
     #find force on rotating object
-    force_gravitational = (g * mass_earth * mass_sun)/((radius_orbit) ** 2) * r_unit
+    force_gravitational = -(g * mass_earth * mass_sun)/((radius_orbit) ** 2) * r_unit
 
     #update momentum
     momentum += force_gravitational * dt
@@ -42,9 +43,18 @@ while t < 360000:
 
     r = r +velocity * dt
 
-    r_list.append(np.round(r, decimals=10))
+    r_list.append(r)
+
+    r_unit = r/np.linalg.norm(r)
 
     t += dt
 
-#create graph here after loop done
-print(r_list)
+x = []
+y = []
+for i in r_list:
+    x.append(i[0])
+    y.append(i[1])
+
+plt.scatter(x, y)
+plt.axis("equal")
+plt.show()
