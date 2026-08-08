@@ -4,17 +4,17 @@
 import numpy as np
 
 #mass of earth
-mass_earth  = 6 * 10 ** 24
+mass_earth  = 6e24
 #mass of sun
-mass_sun = 2 * 10 ** 30
+mass_sun = 2e30
 #Gravitational constant
-g = 6.7 * 10 ** 8
+g = 6.7e-11
 #initial velocity
 velocity = np.array([0,29800,0])
 #orbital radius
-radius_orbit = 1.5 * 10 ** 11
+radius_orbit = 1.5e11
 #delta t
-dt = 3600
+dt = 36000
 #initial position
 r = np.array([1.5 * 10 ** 11, 0, 0])
 
@@ -31,24 +31,20 @@ t = 0
 #end variable setup, begin calculations and updates
 ###############################################################################
 
-while t < 36000000:
+while t < 360000:
     #find force on rotating object
-    force_centripetal = (g * mass_earth * mass_sun)/((radius_orbit) ** 2) * r_unit
+    force_gravitational = (g * mass_earth * mass_sun)/((radius_orbit) ** 2) * r_unit
 
     #update momentum
-    momentum += force_centripetal * dt
+    momentum += force_gravitational * dt
 
     velocity = momentum / mass_earth
 
     r = r +velocity * dt
 
-    r_rounded = np.round(r, decimals = 5)
+    r_list.append(np.round(r, decimals=10))
 
     t += dt
-
-    r_list.append(r_rounded)
-
-    #save data to a list here to graph later
 
 #create graph here after loop done
 print(r_list)
