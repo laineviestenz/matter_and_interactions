@@ -23,6 +23,10 @@ r_unit = r/np.linalg.norm(r)
 #initial momentum
 momentum = velocity * mass_earth
 
+#initial values
+r_list = []
+t = 0
+
 ###############################################################################
 #end variable setup, begin calculations and updates
 ###############################################################################
@@ -36,10 +40,15 @@ while t < 36000000:
 
     velocity = momentum / mass_earth
 
-    r += velocity * dt
+    r = r +velocity * dt
+
+    r_rounded = np.round(r, decimals = 5)
 
     t += dt
+
+    r_list.append(r_rounded)
 
     #save data to a list here to graph later
 
 #create graph here after loop done
+print(r_list)
